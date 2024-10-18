@@ -16,24 +16,23 @@
         header {
             background-color: #4CAF50;
             color: white;
-            text-align: center;
+            text-align: left;
             padding: 2rem;
-            position: relative;
+            display: flex;
+            align-items: center;
         }
 
         header h1 {
             margin: 0;
             font-size: 2.5rem;
+            padding-left: 20px;
         }
 
         header img {
-            width: 200px;
+            width: 150px;
             height: auto;
             border-radius: 50%;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            margin-right: 20px;
         }
 
         .container {
@@ -98,6 +97,15 @@
                 font-size: 2rem;
             }
 
+            header {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            header img {
+                margin-bottom: 1rem;
+            }
+
             .audio-item {
                 flex-direction: column;
                 text-align: center;
@@ -145,8 +153,8 @@
 </head>
 <body>
     <header>
-        <h1>David Jelmark Digital Library</h1>
         <img src="david-jelmark.png" alt="David Jelmark">
+        <h1>David Jelmark Digital Library</h1>
     </header>
 
     <div class="container">
