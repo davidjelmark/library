@@ -85,7 +85,7 @@
             <input type="text" id="search-input" placeholder="Search for audio..." onkeyup="searchAudio()">
         </div>
 
-        <div id="audio-list"></div> <!-- This will be populated by JSON -->
+        <div id="audio-list"></div>
 
         <div class="contact-info">
             <h3>Contact Us</h3>
@@ -106,41 +106,34 @@
     </footer>
 
     <script>
-        // Update this array with your actual audio file URLs and titles
         const audioData = [
             {
                 "title": "Sample Audio",
-                "url": "https://drive.google.com/uc?export=download&id=1inMi7QE6kGD5GX6kpWbDgaSDfbwu9UVy"
+                "url": "https://drive.google.com/file/d/1inMi7QE6kGD5GX6kpWbDgaSDfbwu9UVy/preview"
             }
         ];
 
-        // Function to populate audio list
         const populateAudioList = (data) => {
             const audioListDiv = document.getElementById('audio-list');
-            audioListDiv.innerHTML = ''; // Clear previous list
+            audioListDiv.innerHTML = ''; 
             data.forEach(audio => {
                 const audioElement = document.createElement('div');
                 audioElement.classList.add('audio-item');
                 audioElement.innerHTML = `
-                    <audio controls>
-                        <source src="${audio.url}" type="audio/mpeg">
-                        Your browser does not support the audio tag.
-                    </audio>
+                    <iframe src="${audio.url}" width="100%" height="80" frameborder="0" allow="autoplay"></iframe>
                     <p>${audio.title}</p>
-                    <a href="${audio.url}" download>Download</a> <!-- Download link -->
+                    <a href="${audio.url}" download>Download</a>
                 `;
                 audioListDiv.appendChild(audioElement);
             });
         };
 
-        // Function to search audio by title
         const searchAudio = () => {
             const input = document.getElementById('search-input').value.toLowerCase();
             const filteredData = audioData.filter(audio => audio.title.toLowerCase().includes(input));
             populateAudioList(filteredData);
         };
 
-        // Call the function to populate audio list
         populateAudioList(audioData);
     </script>
 </body>
