@@ -1,156 +1,91 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
     <title>David Jelmark Audio Library</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            color: #333;
             background-color: #f4f4f4;
         }
         header {
+            background: #333;
+            color: #fff;
+            padding: 10px 20px;
             display: flex;
-            justify-content: center;
             align-items: center;
-            background-color: #007bff;
-            padding: 20px;
-            color: white;
+            justify-content: space-between;
         }
         header img {
-            height: 70px; /* Adjusted height for a larger logo */
-            margin-right: 15px; /* Spacing between logo and title */
+            height: 60px; /* Adjust logo size here */
+            margin-right: 10px;
         }
         h1 {
-            margin: 0;
-            font-size: 2em; /* Larger font size for better visibility */
-        }
-        main {
-            padding: 20px;
-            max-width: 800px;
-            margin: auto;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        h2 {
             text-align: center;
-            color: #007bff;
+            margin: 20px 0;
         }
-        .audio-item {
-            margin: 15px 0;
-            border: 1px solid #007bff;
-            border-radius: 5px;
-            padding: 10px;
-            background-color: #f9f9f9;
+        .audio-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
         }
-        .search-container {
+        audio {
+            margin: 10px 0;
+        }
+        .contact-info {
             text-align: center;
-            margin-bottom: 20px;
+            margin: 20px;
         }
-        .contact-info, .social-media {
-            margin-top: 20px;
+        .social-media {
             text-align: center;
-        }
-        .social-media a {
-            margin: 0 10px;
-            text-decoration: none;
-            color: #007bff;
+            margin: 20px;
         }
         footer {
             text-align: center;
             padding: 10px;
-            background-color: #007bff;
-            color: white;
+            background: #333;
+            color: #fff;
             position: relative;
             bottom: 0;
             width: 100%;
         }
     </style>
 </head>
-
 <body>
     <header>
         <img src="david-jelmark.png" alt="David Jelmark Logo">
         <h1>David Jelmark Audio Library</h1>
     </header>
-    
-    <main>
-        <h2>Audio Catalog</h2>
-        
-        <div class="search-container">
-            <input type="text" id="search-input" placeholder="Search for audio..." onkeyup="searchAudio()">
-        </div>
 
-        <div id="audio-list"></div> <!-- This will be populated by JSON -->
+    <div class="audio-container">
+        <h2>Audio Files</h2>
+        <audio controls>
+            <source src="https://drive.google.com/uc?export=download&id=1inMi7QE6kGD5GX6kpWbDgaSDfbwu9UVy" type="audio/mpeg">
+            Your browser does not support the audio tag.
+        </audio>
+        <p>Sample Audio File</p>
+    </div>
 
-        <div class="contact-info">
-            <h3>Contact Us</h3>
-            <p>Email: <a href="mailto:davidjelmark@gmail.com">davidjelmark@gmail.com</a></p>
-        </div>
-        
-        <div class="social-media">
-            <h3>Follow Us</h3>
-            <a href="https://facebook.com" target="_blank">Facebook</a>
-            <a href="https://twitter.com" target="_blank">Twitter</a>
-            <a href="https://instagram.com" target="_blank">Instagram</a>
-            <a href="https://linkedin.com" target="_blank">LinkedIn</a>
-        </div>
-    </main>
-    
+    <div class="contact-info">
+        <h3>Contact Information</h3>
+        <p>Email: <a href="mailto:davidjelmark@gmail.com">davidjelmark@gmail.com</a></p>
+    </div>
+
+    <div class="social-media">
+        <h3>Follow Us</h3>
+        <p>
+            <a href="https://facebook.com">Facebook</a> |
+            <a href="https://twitter.com">Twitter</a> |
+            <a href="https://instagram.com">Instagram</a>
+        </p>
+    </div>
+
     <footer>
         <p>&copy; 2024 David Jelmark. All rights reserved.</p>
     </footer>
-
-    <script>
-        // Update this array with your actual audio file URLs and titles
-        const audioData = [
-            {
-                "title": "Making Your Earth to Yield Increase",
-                "url": "https://drive.google.com/file/d/1inMi7QE6kGD5GX6kpWbDgaSDfbwu9UVy/view?usp=drive_link"
-            },
-            {
-                "title": "Your Audio Title 2",
-                "url": "https://link-to-your-audio-file-2.mp3"
-            },
-            {
-                "title": "Your Audio Title 3",
-                "url": "https://link-to-your-audio-file-3.mp3"
-            }
-            // Add more audio objects as needed
-        ];
-
-        // Function to populate audio list
-        const populateAudioList = (data) => {
-            const audioListDiv = document.getElementById('audio-list');
-            audioListDiv.innerHTML = ''; // Clear previous list
-            data.forEach(audio => {
-                const audioElement = document.createElement('div');
-                audioElement.classList.add('audio-item');
-                audioElement.innerHTML = `
-                    <audio controls>
-                        <source src="${audio.url}" type="audio/mpeg">
-                        Your browser does not support the audio tag.
-                    </audio>
-                    <p>${audio.title}</p>
-                    <a href="${audio.url}" download>Download</a> <!-- Download link -->
-                `;
-                audioListDiv.appendChild(audioElement);
-            });
-        };
-
-        // Function to search audio by title
-        const searchAudio = () => {
-            const input = document.getElementById('search-input').value.toLowerCase();
-            const filteredData = audioData.filter(audio => audio.title.toLowerCase().includes(input));
-            populateAudioList(filteredData);
-        };
-
-        // Call the function to populate audio list
-        populateAudioList(audioData);
-    </script>
 </body>
 </html>
