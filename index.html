@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Catalog</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .audio-item { margin-bottom: 20px; }
+        .audio-item h3 { margin: 0; }
+        #search-box { margin-bottom: 20px; padding: 10px; width: 300px; }
+    </style>
+</head>
+<body>
+
+    <h1>Audio Catalog</h1>
+
+    <!-- Search Box -->
+    <input type="text" id="search-box" placeholder="Search audio...">
+
+    <!-- Audio List -->
+    <div id="audio-list"></div>
+
+    <script>
+        let audioData = [];
+
+        // Fetch JSON data
+        fetch('audios.json')
+            .then(response => response.json())
+            .then(data => {
+                audioData = data;
+                displayAudios(audioData); // Display initially
+            });
+
+        // Function to display audio files
+        function displayAudios(audios) {
+            const audioList = document.getElementById('audio-list');
+            audioList.innerHTML = ''; // Clear existing content
+
+            audios.forEach(audio => {
+                const audioItem = document.createElement('div');
+                audioItem.classList.add('audio-item');
+                audioItem.innerHTML = `
+                    <h3>${audio.title} (${audio.category})</h3>
+                    <audio controls>
+                        <source src="${audio.url}" type="audio/mpeg">
+                        Your browser does not support the audio tag.
+                    </audio>
+                `;
+                audioList.appendChild(audioItem);
+            });
+        }
+
+        // Search function
+        document.getElementById('search-box').addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            const filtered = audioData.filter(audio => 
+                audio.title.toLowerCase().includes(query)
+            );
+            displayAudios(filtered); // Update display with filtered data
+        });
+    </script>
+
+</body>
+</html>
