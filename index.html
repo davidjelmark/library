@@ -1,179 +1,147 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>David Jelmark Digital Library</title>
+    <meta charset="utf-8" />
+    <title>David Jelmark Audio Library</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Source Sans Pro', sans-serif;
             margin: 0;
             padding: 0;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #4CAF50, #2E8B57);
-            color: #333;
         }
-
-        header {
-            background-color: rgba(76, 175, 80, 0.9);
+        .header {
+            background-color: #007BFF;
+            padding: 10px;
             color: white;
-            text-align: left;
-            padding: 2rem;
-            display: flex;
-            align-items: center;
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 2.5rem;
-            padding-left: 20px;
-        }
-
-        header img {
-            width: 150px;
-            height: auto;
-            border-radius: 50%;
-            margin-right: 20px;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-            flex: 1; /* Ensure the main content takes up available space */
-        }
-
-        #search {
-            width: 100%;
-            padding: 0.75rem;
-            font-size: 1.1rem;
-            border: 2px solid #ccc;
-            border-radius: 5px;
-            margin-bottom: 1.5rem;
-            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        #audio-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .audio-item {
-            background-color: white;
-            margin-bottom: 1rem;
-            padding: 1rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .audio-item strong {
-            font-size: 1.25rem;
-            color: #333;
-        }
-
-        .audio-item a {
-            text-decoration: none;
-            background-color: #4CAF50;
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .audio-item a:hover {
-            background-color: #45a049;
-        }
-
-        footer {
             text-align: center;
-            padding: 1.5rem;
-            background: rgba(0, 0, 0, 0.9);
+        }
+        .navbar {
+            display: flex;
+            justify-content: center;
+        }
+        .navbar a {
             color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+        }
+        .navbar a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        .banner-section {
+            background-image: url('img/section-1-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+        .audio-section {
+            padding: 20px;
+        }
+        .audio-section h2 {
+            text-align: center;
+        }
+        .audio-track {
+            margin: 20px 0;
+            text-align: center;
+        }
+        footer {
+            background-color: #007BFF;
+            color: white;
+            text-align: center;
+            padding: 10px;
             position: relative;
             bottom: 0;
             width: 100%;
         }
-
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2rem;
-            }
-
-            header {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            header img {
-                margin-bottom: 1rem;
-            }
-
-            .audio-item {
-                flex-direction: column;
-                text-align: center;
-            }
-        }
     </style>
+</head>
+
+<body>
+    <div id="outer">
+        <header class="header">
+            <h1>David Jelmark Audio Library</h1>
+            <nav class="navbar">
+                <a href="#audio-section">Audio Library</a>
+                <a href="#gallery-section">Gallery</a>
+                <a href="#contact-section">Contact</a>
+            </nav>
+        </header>
+        
+        <div class="banner-section">
+            <img src="david-jelmark.png" alt="David Jelmark Logo" style="max-width: 150px;">
+            <h2>Welcome to the David Jelmark Audio Library!</h2>
+        </div>
+        
+        <section class="audio-section" id="audio-section">
+            <h2>Audio Collection</h2>
+            <div id="audio-tracks"></div>
+        </section>
+
+        <section class="gallery-section" id="gallery-section">
+            <h2>Gallery</h2>
+            <div class="gallery-slider">
+                <!-- Add your gallery images here -->
+            </div>
+        </section>
+
+        <section class="contact-section" id="contact-section">
+            <h2>Contact Us</h2>
+            <p>If you have any questions, feel free to reach out!</p>
+            <p>Email: <a href="mailto:info@davidjelmark.com">info@davidjelmark.com</a></p>
+        </section>
+
+        <footer>
+            <p>Copyright 2024 David Jelmark Audio Library.</p>
+        </footer>
+    </div>
+
     <script>
-        async function loadAudios() {
-            try {
-                const response = await fetch('audios.json');
-                
-                if (!response.ok) {
-                    console.error('Failed to load audios.json:', response.statusText);
-                    return;
-                }
-
-                const audios = await response.json();
-                const audioList = document.getElementById('audio-list');
-                audioList.innerHTML = ''; // Clear the list
-
-                audios.forEach(audio => {
-                    const listItem = document.createElement('li');
-                    listItem.classList.add('audio-item');
-                    listItem.innerHTML = `<strong>${audio.title}</strong> 
-                                          <span>${audio.category}</span> 
-                                          <a href="${audio.url}" target="_blank">Play</a>`;
-                    audioList.appendChild(listItem);
-                });
-            } catch (error) {
-                console.error('Error loading audios:', error);
+        // Sample JSON data for audio tracks
+        const audioData = [
+            {
+                "title": "Track Title 1",
+                "src": "audio/track1.mp3"
+            },
+            {
+                "title": "Track Title 2",
+                "src": "audio/track2.mp3"
+            },
+            {
+                "title": "Track Title 3",
+                "src": "audio/track3.mp3"
+            },
+            {
+                "title": "Track Title 4",
+                "src": "audio/track4.mp3"
             }
-        }
+        ];
 
-        function searchAudios() {
-            const searchTerm = document.getElementById('search').value.toLowerCase();
-            const audioItems = document.querySelectorAll('#audio-list li');
-            audioItems.forEach(item => {
-                const text = item.textContent.toLowerCase();
-                item.style.display = text.includes(searchTerm) ? '' : 'none';
+        // Function to display audio tracks
+        function displayAudioTracks() {
+            const audioContainer = document.getElementById('audio-tracks');
+            audioData.forEach(track => {
+                const trackDiv = document.createElement('div');
+                trackDiv.className = 'audio-track';
+                trackDiv.innerHTML = `
+                    <h4>${track.title}</h4>
+                    <audio controls>
+                        <source src="${track.src}" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                `;
+                audioContainer.appendChild(trackDiv);
             });
         }
 
-        window.onload = loadAudios;
+        // Call the function to display audio tracks on page load
+        displayAudioTracks();
     </script>
-</head>
-<body>
-    <header>
-        <img src="david-jelmark.png" alt="David Jelmark">
-        <h1>David Jelmark Digital Library</h1>
-    </header>
-
-    <div class="container">
-        <input type="text" id="search" placeholder="Search by title or category..." onkeyup="searchAudios()">
-        <ul id="audio-list">
-            <!-- Audio items will be populated here -->
-        </ul>
-    </div>
-
-    <footer>
-        <p>© 2024 David Jelmark Digital Library. All rights reserved.</p>
-    </footer>
 </body>
 </html>
