@@ -97,16 +97,21 @@
     </footer>
 
     <script>
-        // Sample JSON data for audio files (replace with your actual JSON fetching logic)
+        // Update this array with your actual audio file URLs and titles
         const audioData = [
             {
-                "title": "Sample Audio 1",
+                "title": "Your Audio Title 1",
                 "url": "https://link-to-your-audio-file-1.mp3"
             },
             {
-                "title": "Sample Audio 2",
+                "title": "Your Audio Title 2",
                 "url": "https://link-to-your-audio-file-2.mp3"
+            },
+            {
+                "title": "Your Audio Title 3",
+                "url": "https://link-to-your-audio-file-3.mp3"
             }
+            // Add more audio objects as needed
         ];
 
         // Function to populate audio list
@@ -121,6 +126,7 @@
                         Your browser does not support the audio tag.
                     </audio>
                     <p>${audio.title}</p>
+                    <a href="${audio.url}" download>Download</a> <!-- Download link -->
                 `;
                 audioListDiv.appendChild(audioElement);
             });
