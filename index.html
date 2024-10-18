@@ -47,6 +47,10 @@
             padding: 10px;
             background-color: #f9f9f9;
         }
+        .search-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
         .contact-info, .social-media {
             margin-top: 20px;
             text-align: center;
@@ -76,6 +80,11 @@
     
     <main>
         <h2>Audio Catalog</h2>
+        
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Search for audio..." onkeyup="searchAudio()">
+        </div>
+
         <div id="audio-list"></div> <!-- This will be populated by JSON -->
 
         <div class="contact-info">
@@ -115,9 +124,10 @@
         ];
 
         // Function to populate audio list
-        const populateAudioList = () => {
+        const populateAudioList = (data) => {
             const audioListDiv = document.getElementById('audio-list');
-            audioData.forEach(audio => {
+            audioListDiv.innerHTML = ''; // Clear previous list
+            data.forEach(audio => {
                 const audioElement = document.createElement('div');
                 audioElement.classList.add('audio-item');
                 audioElement.innerHTML = `
@@ -132,8 +142,15 @@
             });
         };
 
+        // Function to search audio by title
+        const searchAudio = () => {
+            const input = document.getElementById('search-input').value.toLowerCase();
+            const filteredData = audioData.filter(audio => audio.title.toLowerCase().includes(input));
+            populateAudioList(filteredData);
+        };
+
         // Call the function to populate audio list
-        populateAudioList();
+        populateAudioList(audioData);
     </script>
 </body>
 </html>
