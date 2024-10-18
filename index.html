@@ -4,28 +4,115 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Audio Catalog</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        #search {
+            width: 100%;
+            padding: 0.75rem;
+            font-size: 1.1rem;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 1.5rem;
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #audio-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .audio-item {
+            background-color: white;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .audio-item strong {
+            font-size: 1.25rem;
+            color: #333;
+        }
+
+        .audio-item a {
+            text-decoration: none;
+            background-color: #4CAF50;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .audio-item a:hover {
+            background-color: #45a049;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: #333;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .audio-item {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
     <script>
-        // Function to load and display the audios
         async function loadAudios() {
             try {
                 const response = await fetch('audios.json');
                 
-                // Check if the response is successful
                 if (!response.ok) {
                     console.error('Failed to load audios.json:', response.statusText);
                     return;
                 }
 
                 const audios = await response.json();
-                console.log(audios);  // Log the audios to check if they load correctly
-                
                 const audioList = document.getElementById('audio-list');
-                audioList.innerHTML = ''; // Clear the list before populating
+                audioList.innerHTML = ''; // Clear the list
 
                 audios.forEach(audio => {
                     const listItem = document.createElement('li');
-                    listItem.innerHTML = `<strong>${audio.title}</strong> (${audio.category}) 
-                    - <a href="${audio.url}" target="_blank">Play</a>`;
+                    listItem.classList.add('audio-item');
+                    listItem.innerHTML = `<strong>${audio.title}</strong> 
+                                          <span>${audio.category}</span> 
+                                          <a href="${audio.url}" target="_blank">Play</a>`;
                     audioList.appendChild(listItem);
                 });
             } catch (error) {
@@ -33,7 +120,6 @@
             }
         }
 
-        // Function to filter the audio list
         function searchAudios() {
             const searchTerm = document.getElementById('search').value.toLowerCase();
             const audioItems = document.querySelectorAll('#audio-list li');
@@ -43,14 +129,23 @@
             });
         }
 
-        window.onload = loadAudios; // Load audios when the page loads
+        window.onload = loadAudios;
     </script>
 </head>
 <body>
-    <h1>Audio Catalog</h1>
-    <input type="text" id="search" placeholder="Search..." onkeyup="searchAudios()">
-    <ul id="audio-list">
-        <!-- The audio list will be populated here -->
-    </ul>
+    <header>
+        <h1>Audio Catalog</h1>
+    </header>
+
+    <div class="container">
+        <input type="text" id="search" placeholder="Search by title or category..." onkeyup="searchAudios()">
+        <ul id="audio-list">
+            <!-- Audio items will be populated here -->
+        </ul>
+    </div>
+
+    <footer>
+        <p>© 2024 Audio Catalog. All rights reserved.</p>
+    </footer>
 </body>
 </html>
