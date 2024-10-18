@@ -21,11 +21,13 @@
         .navbar {
             display: flex;
             justify-content: center;
+            margin: 10px 0;
         }
         .navbar a {
             color: white;
             text-decoration: none;
             padding: 10px 20px;
+            transition: background 0.3s;
         }
         .navbar a:hover {
             background-color: rgba(255, 255, 255, 0.2);
@@ -43,13 +45,14 @@
         }
         .audio-section {
             padding: 20px;
-        }
-        .audio-section h2 {
             text-align: center;
         }
         .audio-track {
             margin: 20px 0;
-            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            background-color: #f9f9f9;
         }
         footer {
             background-color: #007BFF;
@@ -60,6 +63,15 @@
             bottom: 0;
             width: 100%;
         }
+        .social-media {
+            margin-top: 20px;
+        }
+        .social-media a {
+            margin: 0 10px;
+            color: #007BFF;
+            text-decoration: none;
+            font-size: 1.5em;
+        }
     </style>
 </head>
 
@@ -69,7 +81,6 @@
             <h1>David Jelmark Audio Library</h1>
             <nav class="navbar">
                 <a href="#audio-section">Audio Library</a>
-                <a href="#gallery-section">Gallery</a>
                 <a href="#contact-section">Contact</a>
             </nav>
         </header>
@@ -84,17 +95,17 @@
             <div id="audio-tracks"></div>
         </section>
 
-        <section class="gallery-section" id="gallery-section">
-            <h2>Gallery</h2>
-            <div class="gallery-slider">
-                <!-- Add your gallery images here -->
-            </div>
-        </section>
-
         <section class="contact-section" id="contact-section">
             <h2>Contact Us</h2>
             <p>If you have any questions, feel free to reach out!</p>
             <p>Email: <a href="mailto:info@davidjelmark.com">info@davidjelmark.com</a></p>
+
+            <div class="social-media">
+                <h3>Follow Us</h3>
+                <a href="https://facebook.com" target="_blank">Facebook</a>
+                <a href="https://twitter.com" target="_blank">Twitter</a>
+                <a href="https://instagram.com" target="_blank">Instagram</a>
+            </div>
         </section>
 
         <footer>
