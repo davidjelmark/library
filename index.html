@@ -109,7 +109,7 @@
         const audioData = [
             {
                 "title": "Sample Audio",
-                "url": "https://drive.google.com/uc?export=download&id=1-MX_G8CXy1ws7Cb0dmiXqoIyvjPOjGgS"
+                "url": "https://www.youtube.com/embed/DFNtUf4TmAw"
             }
         ];
 
@@ -120,10 +120,7 @@
                 const audioElement = document.createElement('div');
                 audioElement.classList.add('audio-item');
                 audioElement.innerHTML = `
-                    <audio controls>
-                        <source src="${audio.url}" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
+                    <iframe src="${audio.url}" width="100%" height="100" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                     <p>${audio.title}</p>
                     <a href="${audio.url}" download>Download</a>
                 `;
